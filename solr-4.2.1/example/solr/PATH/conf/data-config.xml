@@ -1,0 +1,12 @@
+<dataConfig>
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://127.0.0.1/test?zeroDateTimeBehavior=convertToNull" user="root" password="fasttrack"/>
+
+    <document name="Search_Path">
+        <entity  name="search_path" query="Select path,size,volume,last_modified from path" pk="id" >
+            <field name="path" column="path" />
+	    <field name="size" column="size" />
+	    <field name="last_modified" column="last_modified" />
+	    <field name="volume" column="volume" />
+	</entity>
+    </document>
+</dataConfig>

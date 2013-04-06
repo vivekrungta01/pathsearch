@@ -1,0 +1,12 @@
+<dataConfig>
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://127.0.0.1/meta" user="root" password="root"/>
+
+    <document name="Domestic_Institute">
+        <entity name="domestic_institute" query="Select path, size,UNIX_TIMESTAMP(last_modified),volume from path" pk="id" >
+            <field name="path" column="path" />
+	    <field name="size" column="size" />
+	    <field name="last_modified" column="last_modified" />
+	    <field name="volume" column="volume" />
+	</entity>
+    </document>
+</dataConfig>

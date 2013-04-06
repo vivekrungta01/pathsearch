@@ -1,0 +1,95 @@
+<dataConfig>
+    <dataSource type="JdbcDataSource" driver="org.hsqldb.jdbcDriver" url="jdbc:mysql://localhost/htcampus" user="root" password="root"/>
+
+    <document name="consultants">
+        <entity name="consultant" query="SELECT consultant.name as consult_name, consultant.id as id, consultant.slug as consult_slug,
+					 consultant.central_email as consult_cemail,  consultant.central_address as consult_caddr,
+					 consultant.website as consult_web, consultant.central_contact as consult_ccontact,
+					 consultant.display_flag as consult_display_flag, consultant.logo as consult_logo,
+					 consultant.students_admitted as consult_students, consultant.view_count as consult_viewcount,
+					 central_city_id, consultant.map_location as consult_map, rating as consult_rating
+					 from sa_consultant_consultant as consultant"
+                pk="id">
+            <field column='id' name="id" />
+            <field column='consult_name' name='name'/>
+            <field column='consult_slug' name='slug'/>
+            <field column='consult_cemail' name='central_email' />
+            <field column='consult_web' name='website'/>
+            <field column='consult_caddr' name='central_address'/>
+            <field column='consult_ccontact' name='central_contact'/>
+            <field column="consult_students" name="students_admitted"/>
+            <field column='consult_logo' name='logo' />
+            <field column='consult_viewcount' name='view_count' />
+            <field column='consult_display_flag' name='display_flag' />
+            <field column="consult_students" name="students_admitted"/>
+            <field column="consult_map" name="map_location" />
+            <field column="consult_rating" name="rating" />
+
+            <entity name='central_city' query="SELECT slug as consult_centralcity, country_id from sa_master_city where
+				          id='${consultant.central_city_id}'">
+
+                <field column='consult_centralcity' name='central_city' />
+                <entity name="consult_central_country" query="SELECT slug as country_name from sa_master_country
+								    where id='${central_city.country_id}'">
+                    <field column="country_name" name="central_country"/>
+
+                </entity>
+            </entity>
+
+            <entity name='consult_institute' query="SELECT institute_id from sa_consultant_consultantinstitute where
+				 consultant_id='${consultant.id}'">
+                <entity name="inst_name" query="SELECT slug as consult_inst_name from sa_college_institute where
+				id='${consult_institute.institute_id}'">
+                    <field column="consult_inst_name" name="institute"/>
+                </entity>
+                <entity name="program_type" query="SELECT  program_type_id, category_id from sa_college_program where
+              			institute_id='${consult_institute.institute_id}'" >
+                    <entity name='consult_program_type' query="SELECT slug as consult_program from sa_master_programtype where
+			     id='${program_type.program_type_id}'">
+                        <field column='consult_program' name='program_type' />
+                        <field column='consult_program' name='program_type_exact'/>
+                    </entity>
+                    <entity name='consult_coursecategory' query="SELECT slug as consult_course from sa_master_coursecategory where
+			     id='${program_type.category_id}'">
+                        <field column='consult_course' name='course_category' />
+                        <field column='consult_course' name='course_category_exact'/>
+                    </entity>
+                </entity>
+            </entity>
+
+
+            <entity name="location" query="SELECT address as consult_addr, email as consult_email, contact as consult_contact, city_id from
+					sa_consultant_location where consultant_id='${consultant.id}'">
+                <field column="consult_addr" name="address"/>
+                <field column="consult_email" name="email"/>
+                <field column="consult_contact" name="contact"/>
+
+                <entity name="consult_city" query="SELECT slug as city_name, state_id from sa_master_city where id ='${location.city_id}'">
+                    <field column="city_name" name="city" />
+                    <field column="city_name" name="city_exact" />
+                    <entity name="consult_state" query="SELECT slug as state_name, country_id from sa_master_state
+							    where id ='${consult_city.state_id}'">
+                        <field column="state_name" name="state" />
+                        <field column="state_name" name="state_exact" />
+                        <entity name="consult_country" query="SELECT slug as country_name from sa_master_country
+								    where id='${consult_state.country_id}'">
+                            <field column="country_name" name="country"/>
+                            <field column="country_name" name="country_exact"/>
+                        </entity>
+                    </entity>
+
+                </entity>
+            </entity>
+            <entity name="support_service" query="SELECT id from sa_consultant_supportservice where consultant_id='${consultant.id}'">
+                <entity name="consult_education_loan" query="SELECT education_loan, visa_counseling, travel_assistance from
+ 						sa_consultant_supportservice where id='${support_service.id}'">
+
+                    <field column="education_loan" name="education_loan"/>
+                    <field column="education_loan" name="education_loan_exact"/>
+                    <field column="visa_counseling" name="Visa_council"/>
+                    <field column="travel_assistance" name="travel_assistance"/>
+                </entity>
+            </entity>
+        </entity>
+    </document>
+</dataConfig>
