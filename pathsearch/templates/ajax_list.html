@@ -1,0 +1,15 @@
+{% load sizedisplay %}
+<h1 style="text-align:center">{{total}} results found for "{{input_data}}".</h1>
+{% if result %}
+    <table border="1" cellspacing=0px>
+    <tr><th height=30px>Path &uarr;</th><th width=116px>Size</th><th width=145px>Modified</th></tr>
+    {% for each in result %}
+        <tr>
+        <td height=30px>{{ each.path}}</td>
+        <td >{{each.size|sizify}}</td>
+        <td >{{each.last_modified|datetime}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endif %}

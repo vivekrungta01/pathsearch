@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Search Path</title>
+<link href="{{MEDIA_URL}}css/searchpath.css" rel="stylesheet" type="text/css" />
+<script src="{{MEDIA_URL}}scripts/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+function search_path() {
+		if($.trim($('.box').val())!=''){ 
+			$.get('{% url ajax_list %}',{'text':$('.box').val()},function(data){
+				$('#id_search_result').html(data);
+			});
+		} else {
+			$('#id_search_result').html('');
+		}
+	
+}
+$(document).ready(function(){
+	$('.searchbutton').click(function(){
+		search_path();	
+	});
+});
+$(document).keydown(function(e) {
+	if(e.which == 13)
+		search_path();
+});
+</script>
+</head>
+<body > 
+
+<div class="searchbox">
+<input class="box" type="text" placeholder="Enter text  " value="" />
+<input class="searchbutton" type='button' value="Search" />
+</div>
+
+<div id="id_search_result">
+</div>
+</body>
+</html>
