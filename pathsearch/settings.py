@@ -3,7 +3,7 @@ import os
 PROJECT_DIR = os.path.dirname( __file__ )
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-SOLR_URL = 'http://127.0.0.1:8983/solr/'
+SOLR_URL = 'http://127.0.0.1:8983/solr/PATH/'
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )

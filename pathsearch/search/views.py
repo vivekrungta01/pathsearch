@@ -9,7 +9,7 @@ def ajax_list(request):
     if request.method=='GET' and input_data:
         data=input_data.split()
         query_data='+'.join(['*%s*' % each for each in data])
-        url='%sPATH/select?q=%s&start=0&rows=300000&wt=json&indent=true&hl=true&hl.simple.pre=<em>&hl.simple.post=</em>&hl.q=%s&hl.fragsize=0'% (SOLR_URL,query_data,query_data)
+        url='%sselect?q=%s&start=0&rows=300000&wt=json&indent=true&hl=true&hl.simple.pre=<em>&hl.simple.post=</em>&hl.q=%s&hl.fragsize=0'% (SOLR_URL,query_data,query_data)
         res=urllib2.urlopen(url).read()
         res=json.loads(res)
         total=res['response']['numFound']
