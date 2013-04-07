@@ -1,7 +1,7 @@
 pathsearch
 ==========
 
-File path search using solr search engine
+**File path search using solr search engine**
 
 search front-end web for searching file path with given search key using fastest search engine (solr).
 
@@ -40,8 +40,8 @@ e.g   http://127.0.0.1:8983/solr/PATH/    (as in my code)
 
 PATH is core in which all search database indexing and schema present.
 
-PATH folder - solr-4.2.1/example/solr/PATH/
-schema file - solr-4.2.1/example/solr/PATH/conf/schema.xml
-data-config file - solr-4.2.1/example/solr/PATH/conf/data-config.xml
+PATH folder - solr-4.2.1/example/solr/PATH/  <br />
+schema file - solr-4.2.1/example/solr/PATH/conf/schema.xml  <br />
+data-config file - solr-4.2.1/example/solr/PATH/conf/data-config.xml <br />
 
 
