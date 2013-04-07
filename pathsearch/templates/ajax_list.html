@@ -5,7 +5,7 @@
     <tr><th height=30px>Path &uarr;</th><th width=116px>Size</th><th width=145px>Modified</th></tr>
     {% for each in result %}
         <tr>
-        <td height=30px>{{ each.path}}</td>
+        <td height=30px>{{ each.path|safe}}</td>
         <td >{{each.size|sizify}}</td>
         <td >{{each.last_modified|datetime}}</td>
         </tr>

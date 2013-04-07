@@ -62,5 +62,5 @@ left: 18%;
 background-color: rgba(12, 20, 28, .3);
 }
 table {width:100%;table-layout: fixed; word-wrap:break-word;overflow:hidden;}
-
+em { background-color: yellow}
 th{font-size:15px}
